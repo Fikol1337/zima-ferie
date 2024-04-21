@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zima</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        p {
+            color: #666;
+            line-height: 1.6;
+        }
+        #counter {
+            text-align: center;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        /* Efekt płatków śniegu */
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            font-size: 20px;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Witaj na stronie o zimie!</h1>
+    <p>Zima jest cudowną porą roku, pełną śniegu, lodu i uroku. Znajdziesz tutaj informacje, ciekawostki i wiele więcej na temat tego magicznego okresu.</p>
+    <div id="counter">Liczba odwiedzin: <span id="visits">0</span></div>
+</div>
+
+<script>
+    // Licznik odwiedzin
+    let visits = localStorage.getItem('visits');
+    if (!visits) {
+        visits = 0;
+    } else {
+        visits = parseInt(visits);
+    }
+
+    visits++;
+    localStorage.setItem('visits', visits);
+    document.getElementById('visits').textContent = visits;
+
+    // Efekt płatków śniegu
+    document.addEventListener('mousemove', function(event) {
+        const snowflake = document.createElement('span');
+        snowflake.className = 'snowflake';
+        snowflake.innerHTML = '&#10052;'; // Unicode dla symbolu płatka śniegu
+        snowflake.style.left = event.clientX + 'px';
+        snowflake.style.top = event.clientY + 'px';
+        document.body.appendChild(snowflake);
+
+        setTimeout(() => {
+            snowflake.remove();
+        }, 3000);
+    });
+</script>
+</body>
+</html>
